@@ -1,0 +1,7 @@
+# Anirudh Kumar Worklog for ECE 445, Spring 2025
+
+[[_TOC_]]
+
+# 2025-01-26 - Initial Discussion with Teammates
+
+The three of us met for the first time and began discussing the problem further. The initial idea was a generalized type of cup to brew different drinks and allow for both heating and cooling. As we spoke with each other and the TAs, we realized that the cooling aspect would be difficult, as while there are numerous options for heating, there are few or no well-accepted methods for cooling. We thus pivoted to a more specialized project: a self-regulating thermos for brewing tea. Different tea leaves require different water temperatures for brewing, and the goal of this thermos is to handle these aspects for the user. We also brainstormed additional features such as a motor for stirring (to ensure even water distribution and tea strength) and a Bluetooth connection to the user's phone to allow them to control the thermos.
