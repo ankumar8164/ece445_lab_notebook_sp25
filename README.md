@@ -11,3 +11,27 @@ One important aspect of the tea drinking experience (other than temperature of c
 ## 2025-02-25 - Meeting with TAs and Professors
 
 We met with the professor and TAs to present our project proposal. We discussed the different components we planned on implementing as well as additional aspect susch as safety and ethics. We also got some good ideas on alternative solutions if needed. For instance, the professor suggested that if the TDS idea does not work, we could use some sort of light / color sensor, as a stronger tea would have a more opaque color and allow less light through.
+
+## 2025-03-01 - Finalization of Desired Parts
+
+We met up to finalize the parts we needed for our project before we placed the orders. This included our final decision for the ESP32S3 microcontroller board as well as for the motor (needed for stirring), temperature sensor and Peltier heating module. These decisions were based off what devices had support on the PCB design from KiCad as well as what was avaialble in lab.
+
+## 2025-03-06 - Finalization of Design Document
+
+We met up to complete the design document. It was important to better outline how we checked each of our different requirements for the successful completion of this project. It was also illuminating to see the cost if this were a real world project, as this gives a better indication of how such work would be done once we graduate.
+
+## 2025-03-09 - Initial Work with the Microcontroller
+
+We got the delivery of our microcontroller - ESP32S3. This first day with the microcontroller was spent going through the documentation on the Espressidf website. We also learned how to power the device as well as how one would put a program onto it. As an initial test, we wrote a very simple program that just printed "hello world" to the console every ten seconds. After that, I moved onto a program that actually uses the General Purpose Input / Output (GPIO) pins on the microcontroller. Specifically, I connected one of the pins to an LED and resistor in series. Next, I adapted the "hello world" code to set the GPIO pin's output to high every ten seconds rather than printing to the terminal. As such a blinking LED was achieved, and I learned how to use the microcontroller's pins for output purposes.
+
+## 2025-03-11 - Controlling Peripheral Devices via User Input
+
+Of course, we want our thermos to start its operation only when the user says to do so. As such, the next step after figuring out how to manipulate the output values of the GPIO pins was to only turn them high when the user asks for it. I wrote code to take in user input from the terminal. The GPIO pin was also connected to our DC motor, which acts as a stirring mechanism for the thermos. The user types 'motor_on' or 'motor_off' in the terminal which then turns the motor on or off respectively.
+
+## 2025-03-21 - Providing User Input via Bluetooth
+
+We had decided on using Bluetooth rather than Wi-Fi because we would like our thermos to be capable of outdoor usage, where a Wi-Fi network may not necessarily be present. Furthermore, Wi-Fi is needed for situations where we might be transferring more data, but we are not actually transferring too much (instructions to turn on / off, a set temperature or receiving a temperature from the sensor in our thermos). Further, there are two frameworks available to use on the ESP32S3 - Bluedroid and NimBLE. The former can use both classic Bluetooth and Bluetooth Low Energy (BLE), while the latter can just support BLE. Again, given that we will never be exchanging too much data, BLE is preferable. In addition, NimBLE takes up less of a memory footprint, which is desirable when working in a space with limited memory such as a microcontroller. Once I decided on NimBLE, I began working on establishing a connection to the microcontroller from my mobile phone. To be sure that the connection had been made, I wrote the code such that the inbuilt LED on the ESP32S3 would light up when connected to the phone and disconnected. After this, I added a task to accept a boolean value from the phone (0 corresponding to off and 1 corresponding to on) to thus turn the motor on and off. Once set to value, it will stay that way, regardless of the status of the connection, until explicitly changed to a different value.
+
+## 2025-03-24 - Setting the Motor to a Cycle
+
+In the final operation of our product, we of course do not want the motor to be continuously in operation. This wastes power, as all we need from the motor is to have a uniform temperature and concentration of tea throughout (needed to get the most accurate values from the temperature and TDS sensors). As such, we settled on a cycle of 3 seconds ON and 27 seconds OFF. The stirring element should start on this cycle when the user sends an 'on' message and exit the cycle immediately when there is an 'off' message (even if it interrupts the cycle). This was a bit more difficult, as the same program should simultaneously be checking the connection and messages from the user while also maintaing this cycle. I ended up creating a task to run in the background to maintain the cycle. A global variable was used to maintain the ON / OFF state of the motor which helped the cycle task do its work.
