@@ -42,4 +42,10 @@ For this project, we are using the DS18B20 temperature sensor. The sensor consis
 
 ## 2025-04-17 - Integrating Everything
 
-We began working on integrating everything on the software side. A big hurdle came when attempting to combine the Arduino-based code for reading from the temperature sensor with the Bluetooth code from the Espressidf libraries. Despite setting up Platformio to use both Arduino and Espressidf, we were unable to get them to compile. Specifically, the temperature sensor code would compile correctly, but the Espressidf Bluetooth code would not.
+We began working on integrating everything on the software side. A big hurdle came when attempting to combine the Arduino-based code for reading from the temperature sensor with the Bluetooth code from the Espressidf libraries. Despite setting up Platformio to use both Arduino and Espressidf, we were unable to get them to compile. Specifically, the temperature sensor code would compile correctly, but the Espressidf Bluetooth code would not. We were unable to determine the issue today.
+
+## 2025-04-19 - Understanding the Compilation Issue
+
+I figured out why the issue occurred. The reason comes from the following underlying code in Platformio:
+
+![Code Downgrading Espressidf](platformio_bug.png)
