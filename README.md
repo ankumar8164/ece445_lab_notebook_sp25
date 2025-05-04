@@ -46,6 +46,16 @@ We began working on integrating everything on the software side. A big hurdle ca
 
 ## 2025-04-19 - Understanding the Compilation Issue
 
-I figured out why the issue occurred. The reason comes from the following underlying code in Platformio:
+I figured out why the issue occurred. The reason comes from the following underlying code in Platformio, found on their Github:
 
 ![Code Downgrading Espressidf](platformio_bug.png)
+
+For reference, 'frameworks' allows one to list multiple possible frameworks that might be in use in the project (in our case, this would be Espressidf and Arduino). We can see that what this code does is that if Arduino is listed as a framework, it forcefully downgrades Espressidf to version 3.4. However, to carry out our Bluetooth functionality, we need the Espressidf version to be at least 5 or 6. We are thus going to have to pivot for the user interface portion; luckily, Bluetooth was not necessarily a key part of the project but rather just a means to allow for user interaction.
+
+## 2025-04-25 - Finalizing Console-Based Approach
+
+We finalized our console-based approach (using the laptop terminal for the user interaction). We set up three different commands that the user can type into the terminal. The 'set' command allows the user to provide a desired temperature, as accurate as two decimal points if needed, although most users would likely just provide an integer temperature. The 'get' command provides some status messages, such as the current water temperature, the set temperature, the time elapsed since brewing and the tea strength. Finally, the 'on' and 'off' commands turn the stirring on and off respectively.
+
+## 2025-04-29 - Switching Microcontrollers
+
+The microcontroller was fried unfortunately. I was away at the time, and we lost some time before we could work on it as a team. Thankfully, our TA was able to quickly provide a replacement, although it was a different board. We worked to get the program working on this new microcontroller, although due to the tight deadline, we were not able to get it fully working. Later, I emailed the professor if we could get an extension due to what had happened, and she gave it to use. We demoed again successfully the next day.
