@@ -54,7 +54,13 @@ For reference, 'frameworks' allows one to list multiple possible frameworks that
 
 ## 2025-04-25 - Finalizing Console-Based Approach
 
-We finalized our console-based approach (using the laptop terminal for the user interaction). We set up three different commands that the user can type into the terminal. The 'set' command allows the user to provide a desired temperature, as accurate as two decimal points if needed, although most users would likely just provide an integer temperature. The 'get' command provides some status messages, such as the current water temperature, the set temperature, the time elapsed since brewing and the tea strength. Finally, the 'on' and 'off' commands turn the stirring on and off respectively.
+We finalized our console-based approach (using the laptop terminal for the user interaction). We set up three different commands that the user can type into the terminal. The 'set' command allows the user to provide a desired temperature, as accurate as two decimal points if needed, although most users would likely just provide an integer temperature. The 'status' command provides some status messages, such as the current water temperature, the set temperature, the time elapsed since brewing and the tea strength. Finally, the 'on' and 'off' commands turn the stirring on and off respectively. The following flow chart demonstrates the whole program.
+
+![Code Flow Diagram](code_flow.png)
+
+At the start, we configure our GPIO pins, launch our threads for separate tasks and launch the console. Each task runs its code as described prior in this notebook. Meanwhile, we also wait in the console for the same user commands ('status', 'set', 'on' and 'off'). As an example, the following image shows the results of varius 'status' messages that show the system status.
+
+![Results of Various Status Messages](console_messages.png)
 
 ## 2025-04-29 - Switching Microcontrollers
 
